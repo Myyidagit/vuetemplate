@@ -4,7 +4,15 @@
  * @Author: Mr. Xu
  * @Date: 2021-03-12 11:58:47
  * @LastEditors: Mr. Xu
- * @LastEditTime: 2021-04-01 15:14:04
+ * @LastEditTime: 2021-04-06 12:21:58
+-->
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Mr. Xu
+ * @Date: 2021-03-12 11:58:47
+ * @LastEditors: Mr. Xu
+ * @LastEditTime: 2021-04-06 12:21:13
 -->
 <template>
   <div id="Home">
@@ -38,7 +46,15 @@
       </el-aside>
       <el-container>
         <el-header>
-          
+          <div class="user_photo_box">
+            <el-dropdown @command="command">
+              <el-avatar shape="square" :size="50" fit="contain" :src="logoUrl"></el-avatar>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="out">退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            
+          </div>
         </el-header>
         <el-main>
           <router-view />
@@ -57,11 +73,17 @@ export default {
     return {
       activeUrl: "/homePage",
       isCollapse:false,
+      logoUrl:"https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
       routerList:[
         {
-          name: "第一菜单",
+          name: "项目数据",
           path: "/homePage",
-          icon: "el-icon-picture"
+          icon: "el-icon-s-home"
+        },
+        {
+          name: "截贞列表",
+          path: "/goodsList/goodsList",
+          icon: "el-icon-platform-eleme"
         },
         {
           name: "第二菜单",
@@ -79,6 +101,15 @@ export default {
     handleClose(){},
     collHandler(){
       this.isCollapse = !this.isCollapse
+    },
+    command(comd){
+      console.log(comd)
+      switch(comd){
+        case "out":
+          this.$router.push({
+            name:"Login"
+          }) 
+      }
     }
   },
   mounted() {
@@ -164,7 +195,14 @@ export default {
     background-color: #384661;
     color: #fff;
     border-left: 1px solid #fff;
-    
+    text-align: right;
+    .user_photo_box{
+      height: 50px;
+      width: 50px;
+      background: #26344F;
+      margin-top: 5px;
+      display: inline-block;
+    }
   }
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
@@ -172,3 +210,4 @@ export default {
     min-height: 400px;
   }
 </style>
+
