@@ -52,9 +52,21 @@
 <script>
 import Base64 from "../assets/js/base.js";
 import identify from "../components/identify.vue";
+
 export default {
   name: "HelloWorld",
   data() {
+    let identifyCodeCheck = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入验证码'));
+      } else {
+        if (this.login_form.verificationCode != this.identifyCode) {
+          callback(new Error('验证码错误'));
+        }else{
+          callback();
+        }
+      }
+    };
     return {
       checked: true,
       login_form: {
@@ -74,7 +86,7 @@ export default {
           }
         ],
         verificationCode:[
-          { required: true, message: "请输入验证码", trigger: "blur" },
+          { validator: identifyCodeCheck, trigger: 'blur' }
         ]
       },
       identifyCodes: "1234567890",
@@ -142,6 +154,7 @@ export default {
       this.$refs.verify.validate((val)=>{
         if(val){
           this.rememberPassword();
+
           this.$router.push({
             name:'HomePage'
           })
@@ -245,7 +258,7 @@ export default {
             padding-left: 50px;
           }
           .el-form-item__content{
-            line-height: none;
+            line-height: 0;
           }
         }
       }
