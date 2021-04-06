@@ -4,13 +4,18 @@
  * @Author: Mr. Xu
  * @Date: 2021-03-31 16:01:08
  * @LastEditors: Mr. Xu
- * @LastEditTime: 2021-04-01 10:49:15
+ * @LastEditTime: 2021-04-06 11:47:01
  */
 const routes = [
     {
         path:"/",
         name:"Login",
         component: resolve => require(['@/views/login.vue'], resolve),
+    },
+    {
+      path:"/login",
+      name:"Login",
+      component: resolve => require(['@/views/login.vue'], resolve),
     },
     {
       path: "/home",
